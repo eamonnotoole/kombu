@@ -4,13 +4,15 @@ from __future__ import absolute_import, unicode_literals
 import codecs
 import os
 import sys
+import logging
 
-import pickle as pypickle
 try:
     import cPickle as cpickle
 except ImportError:  # pragma: no cover
     cpickle = None  # noqa
 
+logging.debug('KOMBU using dill')
+import dill as pickle
 from collections import namedtuple
 from contextlib import contextmanager
 from io import BytesIO
@@ -33,7 +35,6 @@ if sys.platform.startswith('java'):  # pragma: no cover
 else:
     _decode = codecs.decode
 
-pickle = cpickle or pypickle
 pickle_load = pickle.load
 
 #: Kombu requires Python 2.5 or later so we use protocol 2 by default.

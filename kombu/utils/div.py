@@ -13,7 +13,7 @@ def emergency_dump_state(state, open_file=open, dump=None, stderr=None):
     stderr = sys.stderr if stderr is None else stderr
 
     if dump is None:
-        import pickle
+        import dill as pickle
         dump = pickle.dump
     persist = mktemp()
     print('EMERGENCY DUMP STATE TO FILE -> {0} <-'.format(persist),  # noqa
